@@ -11,3 +11,5 @@ depois entre os gerados: ruído, escala crescente de notas, aleatório e os noss
 dá de pegar gravação de flauta e piano por exemplo: a flauta faz um seno mais puro\
 as gravações dá de pegar de musica clássica q tá em domínio público\
 e colocamos em anexo o código q gerou cada audio
+
+Documento: https://ufrgscpd-my.sharepoint.com/:w:/g/personal/00275604_ufrgs_br/ERbtLlcDGphJudISohRb3_MBa9o8atdyETxBzuNKU3v1Nw?e=gO3K8y
