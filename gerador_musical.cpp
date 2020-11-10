@@ -7,6 +7,9 @@
 #include <vector>
 #include <algorithm>
 
+#include <random>
+#include <string>
+
 #include "read_write_wav.h"
 
 using namespace std;
@@ -88,11 +91,22 @@ class MusicNote
     }
 };
 
+void ruido(float* audio_buffer, int buffer_len){
+    std::default_random_engine generator;
+    std::normal_distribution<float> distribution(0.0,1.0);
 
+    cout << "RUIDO"<< endl;
+
+    for (int n=0; n<buffer_len; n++){
+        audio_buffer[n] = distribution(generator);
+        //cout << audio_buffer[n] << endl;
+    }    
+
+}
 
 int main(int c, char** argv)
 {
-    const float duration = 30.0; //seconds
+    const float duration = 15.0; //seconds
     const float Fs = 44100; //sample rate (samples /second)
     const int buffer_len = round(duration*Fs); // samples
     float *audio_buffer;
@@ -124,7 +138,7 @@ int main(int c, char** argv)
 
     cout << "maxPos: " << max_pos <<  endl;
     // write the notes into the audio buffer
-    for (int k=0; k<notes.size(); k++)
+    /*for (int k=0; k<notes.size(); k++)
     {
         int startPos = notes[k].start_time*Fs;
         int endPos = notes[k].end_time*Fs;
@@ -132,7 +146,9 @@ int main(int c, char** argv)
         cout << "endPos: " << endPos << endl;
         cout << "opa" << endl;
         notes[k].sp->process(audio_buffer + startPos, endPos-startPos);
-    }
+    }*/
+
+    ruido(audio_buffer, buffer_len);
 
     // ============================
     // save output wave
