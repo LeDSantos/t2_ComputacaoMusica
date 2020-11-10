@@ -32,5 +32,5 @@
 *.app
 
 #IGNORAR
-melody.wav
+*.wav
 gerador_musical
