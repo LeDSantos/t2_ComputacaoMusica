@@ -1,8 +1,42 @@
+Título:  
+	  	Tango (Série Alma brasileira)
+Autor:  
+	  	Luciano Gallet   Listar as obras deste autor
+Categoria:  
+	  	Música Erudita Brasileira
+Idioma:  
+	  	Não Aplicável
+Instituição:/Parceiro  
+	  	[on] Orquestra Sinfônica Nacional da Universidade Federal Fluminense 
 on000010.mp3:
 http://www.dominiopublico.gov.br/pesquisa/DetalheObraForm.do?select_action=&co_obra=43540
 
+Título:  
+	  	Batuque (Série Alma brasileira)
+Autor:  
+	  	Luciano Gallet   Listar as obras deste autor
+Categoria:  
+	  	Música Erudita Brasileira
+Idioma:  
+	  	Não Aplicável
+Instituição:/Parceiro  
+	  	[on] Orquestra Sinfônica Nacional da Universidade Federal Fluminense 
 on000011.mp3:
 http://www.dominiopublico.gov.br/pesquisa/DetalheObraForm.do?select_action=&co_obra=43548
 
+Título:  
+	  	A Cavalgada das Valquírias (da ópera As Valquírias)
+Autor:  
+	  	Wilhelm Richard Wagner   Listar as obras deste autor
+Categoria:  
+	  	Música Erudita
+Idioma:  
+	  	Não Aplicável
+Instituição:/Parceiro  
+	  	[gu] Projeto Gutenberg   
 gu10177.mp3 com muito ruido no fundo:
 http://www.dominiopublico.gov.br/pesquisa/DetalheObraForm.do?select_action=&co_obra=3588
+
+Tico tico no fubá, https://pt.wikipedia.org/wiki/Ficheiro:Tico_Tico_no_Fub%C3%A1-Orquestra_Colbaz-Zequinha_de_Abreu-1931.ogg
+qualidade ruimzinha:
+https://upload.wikimedia.org/wikipedia/commons/4/4d/Tico_Tico_no_Fub%C3%A1-Orquestra_Colbaz-Zequinha_de_Abreu-1931.ogg
