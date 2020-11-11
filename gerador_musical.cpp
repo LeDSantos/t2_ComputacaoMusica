@@ -103,39 +103,35 @@ void ruido(float* audio_buffer, int buffer_len){
 }
 
 void escala_crescente(float* audio_buffer, int buffer_len, float Fs, float duration){
-    int i, notaMIDIinicial, tam_escala;
+    int i, notaMIDIinicial, tam_escala, k, max_pos, startPos, endPos;
     float nota_duration;
     vector<MusicNote> notes;
-
-
-    SineOscillator *s[100];
+    SineOscillator *s;
 
     cout << "Digite a nota MIDI inicial: ";
     cin >> notaMIDIinicial;
-
     cout << "Digite a duração de cada nota: ";
     cin >> nota_duration;
 
     tam_escala=int(duration/nota_duration);
 
     for(i=0; i<tam_escala; i++){
-        s[i] = new SineOscillator(notaMIDIinicial+i, 1, Fs);
-        MusicNote m(s[i], i*nota_duration, (i+1)*nota_duration);
+        s = new SineOscillator(notaMIDIinicial+i, 1, Fs);
+        MusicNote m(s, i*nota_duration, (i+1)*nota_duration);
         notes.push_back(m);
     }
 
-    int max_pos = 0;
-    for (int k=0; k<notes.size(); k++)
-    {
+    /*max_pos = 0;
+    for (k=0; k<notes.size(); k++){
         max_pos = std::max((float)max_pos, (float)round(notes[k].end_time*Fs));
     }
 
     if(DEBUG) cout << "maxPos: " << max_pos <<  endl;
+    */
     // write the notes into the audio buffer
-    for (int k=0; k<notes.size(); k++)
-    {
-        int startPos = notes[k].start_time*Fs;
-        int endPos = notes[k].end_time*Fs;
+    for (k=0; k<notes.size(); k++){
+        startPos = notes[k].start_time*Fs;
+        endPos = notes[k].end_time*Fs;
         if(DEBUG){
             cout << "startPos: " << startPos << endl;
             cout << "endPos: " << endPos << endl;
