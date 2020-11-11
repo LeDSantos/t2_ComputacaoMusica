@@ -14,7 +14,7 @@
 
 using namespace std;
 
-#define DEBUG 0
+#define DEBUG 1
 
 #define TRANSICAO 0.1
 
@@ -108,9 +108,9 @@ void escala_crescente(float* audio_buffer, int buffer_len, float Fs, float durat
     vector<MusicNote> notes;
     SineOscillator *s;
 
-    cout << "Digite a nota MIDI inicial: ";
+    cout << "Digite a nota MIDI inicial[0 até 127]: ";
     cin >> notaMIDIinicial;
-    cout << "Digite a duração de cada nota: ";
+    cout << "Digite a duração em segundos de cada nota: ";
     cin >> nota_duration;
 
     tam_escala=int(duration/nota_duration);
@@ -143,6 +143,36 @@ void escala_crescente(float* audio_buffer, int buffer_len, float Fs, float durat
 
 void audio_aleatorio(float* audio_buffer, int buffer_len, float Fs, float duration){
 
+    int i, oitavaMIDIinicial, tam_escala, k, max_pos, startPos, endPos, nota;
+    float nota_duration;
+    vector<MusicNote> notes;
+    SineOscillator *s;
+
+    cout << "Digite a oitava inicial[-1 até 9]: ";
+    cin >> oitavaMIDIinicial;
+    cout << "Digite a duração em segundos de cada nota: ";
+    cin >> nota_duration;
+
+    tam_escala=int(duration/nota_duration);
+
+    for(i=0; i<tam_escala; i++){
+        nota=12*(oitavaMIDIinicial+1)+rand()%12;
+        s = new SineOscillator(nota, 1, Fs);
+        if(DEBUG) cout << nota << endl;
+        MusicNote m(s, i*nota_duration, (i+1)*nota_duration);
+        notes.push_back(m);
+    }
+
+    // write the notes into the audio buffer
+    for (k=0; k<notes.size(); k++){
+        startPos = notes[k].start_time*Fs;
+        endPos = notes[k].end_time*Fs;
+        if(DEBUG){
+            cout << "startPos: " << startPos << endl;
+            cout << "endPos: " << endPos << endl;
+        }
+        notes[k].sp->process(audio_buffer + startPos, endPos-startPos);
+    }
     return;
 }
 
@@ -152,6 +182,7 @@ int main(int c, char** argv)
     const float Fs = 44100; //sample rate (samples /second)
     const int buffer_len = round(duration*Fs); // samples
     float *audio_buffer;
+    float *audio_buffer2;
     string wav_name;
 
     audio_buffer = new float[buffer_len];
@@ -168,6 +199,17 @@ int main(int c, char** argv)
         case 1: ruido(audio_buffer, buffer_len); wav_name = "ruido.wav"; break;
         case 2: escala_crescente(audio_buffer, buffer_len, Fs, duration); wav_name = "crescente.wav"; break;
         case 3: audio_aleatorio(audio_buffer, buffer_len, Fs, duration); wav_name = "aleatorio.wav"; break;
+    /*    case 4: 
+            escala_crescente(audio_buffer, buffer_len, Fs, duration);
+            audio_buffer2 = new float[buffer_len];
+            memset(audio_buffer2, 0, buffer_len);
+            audio_aleatorio(audio_buffer2, buffer_len, Fs, duration);
+
+            for(i=0; i<buffer_len; i++)
+                audio_buffer[i]+=audio_buffer2[i];
+                audio_buffer[i]/=2;
+            wav_name = "aleatorio_crescente.wav";
+            break;*/ //ideia legal, mas sai um som horrivel
         default: return 0;
             break;
     }
@@ -175,7 +217,7 @@ int main(int c, char** argv)
     // ============================
     // save output wave
     write_wave_file (wav_name.c_str(), audio_buffer, buffer_len, Fs);
-    cout << "done." << endl;
+    if(DEBUG) cout << "done." << endl;
     delete [] audio_buffer;
 
     return 0;
