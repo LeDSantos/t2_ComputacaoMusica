@@ -14,8 +14,8 @@
 
 using namespace std;
 
-#define DURACAO_NOTA 0.3
-#define TAM_PARTITURA 16
+#define DEBUG 0
+
 #define TRANSICAO 0.1
 
 //helper functions
@@ -63,7 +63,7 @@ class SineOscillator : public SoundProcessor
 
         void process(float* audio_buffer, int buffer_len) 
         {
-            cout << "sine class -> call process: "<<  buffer_len << " amp: "<<  amp << " freq: "<< freq << "  Fs: " << Fs << endl;
+            if(DEBUG) cout << "sine class -> call process: "<<  buffer_len << " amp: "<<  amp << " freq: "<< freq << "  Fs: " << Fs << endl;
 
             int dividido=buffer_len*TRANSICAO;
             float fator;
@@ -71,7 +71,6 @@ class SineOscillator : public SoundProcessor
                 if(n<dividido)                      fator=(n / ((float) dividido));//inicio
                 else if (n> buffer_len - dividido)  fator=(buffer_len - n) / ((float) dividido);//final                
                 else                                fator=1.0;//no meio
-
                 audio_buffer[n] = fator * amp * sin(2*M_PI*freq*(((float)n)/Fs));
             }
 
@@ -104,56 +103,83 @@ void ruido(float* audio_buffer, int buffer_len){
 
 }
 
+void escala_crescente(float* audio_buffer, int buffer_len, float Fs, float duration){
+    int i, notaMIDIinicial, tam_escala;
+    float nota_duration;
+    vector<MusicNote> notes;
+
+
+    SineOscillator *s[100];
+
+    cout << "Digite a nota MIDI inicial: " << endl;
+    cin >> notaMIDIinicial;
+
+    cout << "Digite a duração de cada nota: " << endl;
+    cin >> nota_duration;
+
+    tam_escala=int(duration/nota_duration);
+
+    for(i=0; i<tam_escala; i++){
+        s[i] = new SineOscillator(notaMIDIinicial+i, 1, Fs);
+        MusicNote m(s[i], i*nota_duration, (i+1)*nota_duration);
+        notes.push_back(m);
+    }
+
+    int max_pos = 0;
+    for (int k=0; k<notes.size(); k++)
+    {
+        max_pos = std::max((float)max_pos, (float)round(notes[k].end_time*Fs));
+    }
+
+    if(DEBUG) cout << "maxPos: " << max_pos <<  endl;
+    // write the notes into the audio buffer
+    for (int k=0; k<notes.size(); k++)
+    {
+        //cout << "AQUIIIIIIIIIIII" << endl;
+        int startPos = notes[k].start_time*Fs;
+        int endPos = notes[k].end_time*Fs;
+        if(DEBUG){
+            cout << "startPos: " << startPos << endl;
+            cout << "endPos: " << endPos << endl;
+        }
+        notes[k].sp->process(audio_buffer + startPos, endPos-startPos);
+    }
+
+}
+
+void audio_aleatorio(float* audio_buffer, int buffer_len, float Fs, float duration){
+
+    
+}
+
 int main(int c, char** argv)
 {
     const float duration = 15.0; //seconds
     const float Fs = 44100; //sample rate (samples /second)
     const int buffer_len = round(duration*Fs); // samples
     float *audio_buffer;
-    vector<MusicNote> notes;
+    string wav_name;
 
-    //===============================
-    SineOscillator *s[TAM_PARTITURA];
-    
-    int notas[TAM_PARTITURA]={70,69,70,69,74,72,58,58,    60,74,60,75,65,75,80,0};
+    audio_buffer = new float[buffer_len];
+    memset(audio_buffer, 0, buffer_len);
 
-    int i,j;
-    for(i=0; i<TAM_PARTITURA; i++){
-        s[i] = new SineOscillator(notas[i], 1, Fs);
+    int i,j, escolha;
+
+    cout << "PROGRAMA GERADOR MUSICAL\nO programa gera áudios de " << duration << " segundos em arquivo *.wav\nDigite:\n1 para ruído;\n2 para escala crescente de notas MIDI;\n3 para notas aleatórias." << endl;
+
+    cin >> escolha;
+
+    switch (escolha){
+        case 1: ruido(audio_buffer, buffer_len); wav_name = "ruido.wav"; break;
+        case 2: escala_crescente(audio_buffer, buffer_len, Fs, duration); wav_name = "crescente.wav"; break;
+        case 3: audio_aleatorio(audio_buffer, buffer_len, Fs, duration); wav_name = "aleatorio.wav"; break;
+        default: return 0;
+            break;
     }
-    for(i=0; i<TAM_PARTITURA*4; i++){
-        MusicNote m(s[(i%TAM_PARTITURA)], (i*DURACAO_NOTA), ((i+1)*DURACAO_NOTA));
-        notes.push_back(m);
-    }
-
-    //===============================
-    // get max signal duration
-    int max_pos = 0;
-    for (int k=0; k<notes.size(); k++)
-    {
-        max_pos = std::max((float)max_pos, (float)round(notes[k].end_time*Fs));
-    }
-    audio_buffer = new float[max_pos];
-    memset(audio_buffer, 0, max_pos);
-
-    cout << "maxPos: " << max_pos <<  endl;
-    // write the notes into the audio buffer
-    /*for (int k=0; k<notes.size(); k++)
-    {
-        int startPos = notes[k].start_time*Fs;
-        int endPos = notes[k].end_time*Fs;
-        cout << "startPos: " << startPos << endl;
-        cout << "endPos: " << endPos << endl;
-        cout << "opa" << endl;
-        notes[k].sp->process(audio_buffer + startPos, endPos-startPos);
-    }*/
-
-    ruido(audio_buffer, buffer_len);
 
     // ============================
     // save output wave
-    string wav_name = "melody.wav";
-    write_wave_file (wav_name.c_str(), audio_buffer, max_pos, Fs);
+    write_wave_file (wav_name.c_str(), audio_buffer, buffer_len, Fs);
     cout << "done." << endl;
     delete [] audio_buffer;
 
