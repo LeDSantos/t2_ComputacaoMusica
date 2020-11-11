@@ -94,13 +94,12 @@ void ruido(float* audio_buffer, int buffer_len){
     std::default_random_engine generator;
     std::normal_distribution<float> distribution(0.0,1.0);
 
-    cout << "RUIDO"<< endl;
+    if(DEBUG) cout << "RUIDO"<< endl;
 
     for (int n=0; n<buffer_len; n++){
         audio_buffer[n] = distribution(generator);
-        //cout << audio_buffer[n] << endl;
     }    
-
+    return;
 }
 
 void escala_crescente(float* audio_buffer, int buffer_len, float Fs, float duration){
@@ -111,10 +110,10 @@ void escala_crescente(float* audio_buffer, int buffer_len, float Fs, float durat
 
     SineOscillator *s[100];
 
-    cout << "Digite a nota MIDI inicial: " << endl;
+    cout << "Digite a nota MIDI inicial: ";
     cin >> notaMIDIinicial;
 
-    cout << "Digite a duração de cada nota: " << endl;
+    cout << "Digite a duração de cada nota: ";
     cin >> nota_duration;
 
     tam_escala=int(duration/nota_duration);
@@ -135,7 +134,6 @@ void escala_crescente(float* audio_buffer, int buffer_len, float Fs, float durat
     // write the notes into the audio buffer
     for (int k=0; k<notes.size(); k++)
     {
-        //cout << "AQUIIIIIIIIIIII" << endl;
         int startPos = notes[k].start_time*Fs;
         int endPos = notes[k].end_time*Fs;
         if(DEBUG){
@@ -144,12 +142,12 @@ void escala_crescente(float* audio_buffer, int buffer_len, float Fs, float durat
         }
         notes[k].sp->process(audio_buffer + startPos, endPos-startPos);
     }
-
+    return;
 }
 
 void audio_aleatorio(float* audio_buffer, int buffer_len, float Fs, float duration){
 
-    
+    return;
 }
 
 int main(int c, char** argv)
@@ -165,7 +163,8 @@ int main(int c, char** argv)
 
     int i,j, escolha;
 
-    cout << "PROGRAMA GERADOR MUSICAL\nO programa gera áudios de " << duration << " segundos em arquivo *.wav\nDigite:\n1 para ruído;\n2 para escala crescente de notas MIDI;\n3 para notas aleatórias." << endl;
+    cout << "PROGRAMA GERADOR MUSICAL\nO programa gera áudios de " << duration << " segundos em arquivo *.wav" << endl;
+    cout << "Digite:\n1 para ruído;\n2 para escala crescente de notas MIDI;\n3 para notas aleatórias.\nEscolha: ";
 
     cin >> escolha;
 
