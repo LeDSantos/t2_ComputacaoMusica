@@ -14,7 +14,7 @@
 
 using namespace std;
 
-#define DEBUG 1
+#define DEBUG 0
 
 #define TRANSICAO 0.1
 
@@ -121,13 +121,6 @@ void escala_crescente(float* audio_buffer, int buffer_len, float Fs, float durat
         notes.push_back(m);
     }
 
-    /*max_pos = 0;
-    for (k=0; k<notes.size(); k++){
-        max_pos = std::max((float)max_pos, (float)round(notes[k].end_time*Fs));
-    }
-
-    if(DEBUG) cout << "maxPos: " << max_pos <<  endl;
-    */
     // write the notes into the audio buffer
     for (k=0; k<notes.size(); k++){
         startPos = notes[k].start_time*Fs;
