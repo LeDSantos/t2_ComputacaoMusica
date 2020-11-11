@@ -27,3 +27,6 @@ as gravações dá de pegar de musica clássica q tá em domínio público\
 e colocamos em anexo o código q gerou cada audio
 
 Documento: https://ufrgscpd-my.sharepoint.com/:w:/g/personal/00275604_ufrgs_br/ERbtLlcDGphJudISohRb3_MBa9o8atdyETxBzuNKU3v1Nw?e=gO3K8y
+
+Apresentação: https://ufrgscpd-my.sharepoint.com/:p:/g/personal/00275604_ufrgs_br/EZwAgF1ln4lLhDtIV7DrD2AB_MiEfXURlHzZiLWpY9Llww?e=iyNYu3
+
