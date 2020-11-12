@@ -1,6 +1,6 @@
 /* Simple C program for .wav soundscape generation. (C) P.B.L. Meijer 1996 */
 //fonte: https://www.seeingwithsound.com/im2sound.htm
-#define FNAME "arti_abc.wav"
+#define FNAME "testearti_abc.wav"
 #define N     64   /* Resolution, i.e., # rows and columns   */
 #define FL   500   /* Lowest  frequency (Hz) in visual sound */
 #define FH  5000   /* Highest frequency (Hz)                 */
@@ -86,8 +86,8 @@ void wi(unsigned int i) { int b1,b0; b0=i%256; b1=(i-b0)/256; putc(b0,fp); putc(
 void wl(long l) { unsigned int i1,i0; i0=l%65536L; i1=(l-i0)/65536L; wi(i0); wi(i1); }
 double rnd(void){ ir = (ir*ia+ic) % im; return ir / (1.0*im); }
 
-int main(int argc, char *argv[])
-{
+//int imprime_texto(int argc, char *argv[])
+int imprime_texto(){
    int    i, j, b, d = D;
    long   k = 0L, ns = (long) (FS * T), m = ns / N;
    double **A, t, dt = 1.0 / FS, *w, *phi0, s, y, yp, z, tau1, tau2, scale = 0.5/sqrt(N);
@@ -101,7 +101,9 @@ int main(int argc, char *argv[])
       for (j=0; j<N; j++) {
          if (P[i][j]>'a') A[N-i-1][j] = pow(10.0,(P[i][j]-'a'-15)/10.0); /* 2dB steps */
          else A[N-i-1][j] = 0.0;
+         //printf("%f", A[N-i-1][j]);
       }
+      //printf("\n");
    }
 
    /* Set lin|exp (0|1) frequency distribution and random initial phase */
