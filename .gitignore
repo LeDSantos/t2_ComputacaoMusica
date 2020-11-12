@@ -34,3 +34,6 @@
 #IGNORAR
 #*.wav
 gerador_musical
+*.wav
+*NUMEROS.txt
+muda_letras_numeros.c
