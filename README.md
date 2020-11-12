@@ -13,7 +13,19 @@ make
 ```
 
 ## PROGRAMA GERADOR MUSICAL
-O programa gera áudios de 15 segundos em arquivo *.wav. O áudio pode conter ruído, escala crescente de notas MIDI ou notas aleatórias. Dependendo da sua escolha, serão necessárias mais informações.
+O programa gera áudios de 15 segundos em arquivo *.wav. O áudio pode conter ruído, escala crescente de notas MIDI, notas aleatórias ou imagem esteganografada. Dependendo da sua escolha, serão necessárias mais informações.
+
+### Ruído
+Utiliza distribuição gausiana de média 0 e variância 1 para determinar o sample.
+
+### Escala crescente
+Cria um sample contendo uma escala de notas que inicia no valor MIDI(0 até 127) informado, cada uma com a duração(em segundos) informada.
+
+### Notas aleatórias
+Após informar a oitava utilizada(-1 até 9), cria sample contendo notas aleatórias com a duração(em segundos) informada.
+
+### Imagem esteganografada
+A imagem utilizada que está nesse [arquivo](imagem.txt)
 
 Tive uma ideia de outro coisa q a gente pode fazer: gerar audios, tipo com ruido em distribuição gaussiana ou com notas musicais aleatórias(dá de fazer isso com o código do lab de C++) e coisas desse tipo, colocar no sonic visualizer e analisar\
 a parte prática do trabalho seria gerar os áudios por programação mesmo\
