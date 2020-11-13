@@ -43,7 +43,8 @@ void process(float* audio_buffer, int buffer_len){
 }
 ```
 Fator se comporta da seguinte forma:\
-GRÁFICO\
+![ADC](grafico.jpg)
+<!--Format: ![Alt Text](url) -->
 Isso se torna um envelope sobre o seno, que produz um som mais agradável.
 
 ### Ruído
