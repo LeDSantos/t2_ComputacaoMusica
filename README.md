@@ -31,7 +31,6 @@ Sabendo que TRANSICAO=0.1, existe a seguinte função dentro da classe SineOscil
 
 ```
 void process(float* audio_buffer, int buffer_len){
-  if(DEBUG) cout << "sine class -> call process: "<<  buffer_len << " amp: "<<  amp << " freq: "<< freq << "  Fs: " << Fs << endl;
 
   int dividido=buffer_len*TRANSICAO;
   float fator;
