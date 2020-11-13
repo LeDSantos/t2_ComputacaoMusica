@@ -1,10 +1,23 @@
+<big>
+  <p align="center"><b>Universidade Federal do Rio Grande do Sul – UFRGS</b></p>
+
+  <b>Disciplina: Computação &amp; Música (2020/1) – Tópicos Especiais em Computação XVI
+
+  Professores: Marcelo de Oliveira Johann, Marcelo Soares Pimenta e Rodrigo Schramm</b>
+
+  <p align="center"><b>Relatório do Trabalho Prático</b></p>
+
+  <b>Alunas: Izadora Dourado Berti(275606) e Letícia dos Santos(275604)</b>
+</big>
+___
 # t2_ComputacaoMusica
-Trabalho prático de Computação &amp; Música (2020/1) - Tópicos Especiais em Computação XVI, UFRGS.
 
 **Pré-requisito: biblioteca libsndfile (disponível em http://www.mega-nerd.com/libsndfile/).**
 
 Esse projeto foi escrito utilizando as tarefas do laboratório (disponível em https://github.com/schramm/compmus_2020_1) como modelo.
 A biblioteca read_write_wav.h possibilita ler e escrever em um arquivo *.wav.
+
+Vídeo da apresentação em:
 
 Para executar:
 ```prompt
