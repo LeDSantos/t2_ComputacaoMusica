@@ -13,18 +13,42 @@ make
 ```
 
 ## PROGRAMA GERADOR MUSICAL
-O programa gera áudios de 15 segundos em arquivo *.wav. O áudio pode conter ruído, escala crescente de notas MIDI ou notas aleatórias. Dependendo da sua escolha, serão necessárias mais informações.
+O programa gera áudios de 15 segundos em arquivo *.wav. O áudio pode conter ruído, escala crescente de notas MIDI, notas aleatórias ou imagem esteganografada. As notas utilizam envelope. Dependendo da sua escolha, serão necessárias mais dados. As informações apresentadas a seguir são sobre o código do arquivo gerador_musical.cpp.
 
-Tive uma ideia de outro coisa q a gente pode fazer: gerar audios, tipo com ruido em distribuição gaussiana ou com notas musicais aleatórias(dá de fazer isso com o código do lab de C++) e coisas desse tipo, colocar no sonic visualizer e analisar\
-a parte prática do trabalho seria gerar os áudios por programação mesmo\
-dava até de ler informações de um arquivo, tipo pega uma sequencia de números e aquilo vira uma música\
-Título: geração de aúdio "por meio de algoritmo" e análise\
-esse por meio de algoritmo tem um nome mais chique, agora não tô lembrando\
-analise do audio gerado vesus uma gravação: o gerado vai estar com menos ruido\
-depois entre os gerados: ruído, escala crescente de notas, aleatório e os nossos trabalhos artisticos\
-dá de pegar gravação de flauta e piano por exemplo: a flauta faz um seno mais puro\
-as gravações dá de pegar de musica clássica q tá em domínio público\
-e colocamos em anexo o código q gerou cada audio
+### Envelope
+Sabendo que TRANSICAO=0.1, existe a seguinte função dentro da classe SineOscillator no para calcular os valores do buffer:
+```C++
+void process(float* audio_buffer, int buffer_len){
+  if(DEBUG) cout << "sine class -> call process: "<<  buffer_len << " amp: "<<  amp << " freq: "<< freq << "  Fs: " << Fs << endl;
+
+  int dividido=buffer_len*TRANSICAO;
+  float fator;
+  for (int n=0; n<buffer_len; n++){     ////ENVELOPE PRIMITIVO
+    if(n<dividido)                      fator=(n / ((float) dividido));//inicio
+    else if (n> buffer_len - dividido)  fator=(buffer_len - n) / ((float) dividido);//final                
+    else                                fator=1.0;//no meio
+  audio_buffer[n] = fator * amp * sin(2*M_PI*freq*(((float)n)/Fs));
+  }
+}
+```
+Fator se comporta da seguinte forma:\
+GRÁFICO\
+Isso se torna um envelope sobre o seno, que produz um som mais agradável.
+
+### Ruído
+Utiliza distribuição gausiana de média 0 e variância 1 para determinar a amostra.
+
+### Escala crescente
+Cria uma amostra contendo uma escala de notas que inicia no valor MIDI(0 até 127) informado, cada uma com a duração(em segundos) informada.
+
+### Notas aleatórias
+Após informar a oitava utilizada(-1 até 9), cria amostra contendo notas aleatórias com a duração(em segundos) informada.
+
+### Imagem esteganografada
+De acordo com a Wikipédia, [esteganografia](https://pt.wikipedia.org/wiki/Esteganografia) (do grego "escrita escondida") é o estudo e uso das técnicas para ocultar a existência de uma mensagem dentro de outra, uma forma de segurança por obscurantismo. O código em C disponibilizado [aqui](https://www.seeingwithsound.com/im2sound.htm) foi adaptado para ser utilizado no programa.
+
+A imagem de 64x64 bits com 16 escalas de cinza está em um arquivo *.txt, sendo que, após um processamento do programa, 'a' corresponde a 0, 'b' a 1, a assim sucessivemente até 'p' corresponder a 15 dentro de uma matriz 64x64. Inicialmente, a são criados valores para frequência e fase das ondas seno que serão utilizadas posteriormente. Após, é feito um loop para determinar os valores que serão colocados no buffer que será gravado no arquivo de áudio. Uma coluna da matriz de cinzas é analisada a cada interação, os elementos são utilizados como amplitude do seno e a soma dos senos da coluna resulta em uma onda. A onda passa por um filtro passa-baixa de segunda ordem. Então, o resultado é colocado no buffer. Como a imagem preenche somente 1 segundo, o restante do buffer é preenchido com copias do primeiro segundo.
+
 
 Documento: https://ufrgscpd-my.sharepoint.com/:w:/g/personal/00275604_ufrgs_br/ERbtLlcDGphJudISohRb3_MBa9o8atdyETxBzuNKU3v1Nw?e=gO3K8y
 
