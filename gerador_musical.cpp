@@ -195,13 +195,23 @@ void audio::aleatorio(){
 }
 
 void audio::imagem(){
-    int    i, j;
+    int    i, j, escolha;
     float duration_imagem=1.0;
-    string linha[64];
+    string linha[64], nome_arq;
 
-    cout << "A imagem do arquivo imagem.txt será escondida no áudio." << endl;
+    cout << "Escolha qual imagem será escodida. Digite:\n1 para ABC;\n2 para CARRO;\n3 para FACE.\nEscolha: ";
+    cin >> escolha;
 
-    ifstream arq ("imagem.txt");
+    switch (escolha){
+        case 1: nome_arq = "imagemABC.txt"; break;
+        case 2: nome_arq = "imagemCARRO.txt"; break;
+        case 3: nome_arq = "imagemFACE.txt"; break;
+        default: return; break;
+    }
+
+    cout << "A imagem do arquivo " << nome_arq << "será escondida no áudio." << endl;
+
+    ifstream arq (nome_arq);
     if (arq.is_open()){
         for(i=0; getline (arq,linha[i]); i++){ }
         arq.close();
@@ -284,10 +294,10 @@ int main(int c, char** argv){
     int i, escolha;
 
     cout << "PROGRAMA GERADOR MUSICAL\nO programa gera áudios de " << duration << " segundos em arquivo *.wav com frequência de amostragem " << Fs << " Hz." << endl;
-    cout << "Digite:\n1 para ruído;\n2 para escala crescente de notas MIDI;\n3 para notas aleatórias.\n4 som ABC\nEscolha: ";
+    cout << "Digite:\n1 para ruído;\n2 para escala crescente de notas MIDI;\n3 para notas aleatórias.\n4 para som com mensagem esteganografada.\nEscolha: ";
 
     cin >> escolha;
-
+    cout << endl;
     switch (escolha){
         case 1: som.ruido();            wav_name = "ruido.wav"; break;
         case 2: som.escala_crescente(); wav_name = "crescente.wav"; break;
@@ -296,6 +306,8 @@ int main(int c, char** argv){
         default: return 0;
             break;
     }
+
+    cout << endl;
     if(DEBUG) for(i=0; i<50; i++)
         printf("%f ", audio_buffer[i]);
 
