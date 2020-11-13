@@ -1,8 +1,8 @@
-<big><p align="center"><b>Universidade Federal do Rio Grande do Sul – UFRGS</b></p></big>
+<p align="center"><b>Universidade Federal do Rio Grande do Sul – UFRGS</b></p>
 
-<big><b>Disciplina: Computação &amp; Música (2020/1) – Tópicos Especiais em Computação XVI</big>
+<big><b>Disciplina: Computação &amp; Música (2020/1) – Tópicos Especiais em Computação XVI</b></big>
 
-<big>Professores: Marcelo de Oliveira Johann, Marcelo Soares Pimenta e Rodrigo Schramm</b></big>
+<big><b>Professores: Marcelo de Oliveira Johann, Marcelo Soares Pimenta e Rodrigo Schramm</b></big>
 
 <big><p align="center"><b>Relatório do Trabalho Prático</b></p></big>
 
@@ -29,7 +29,7 @@ O programa gera áudios de 15 segundos em arquivo *.wav. O áudio pode conter ru
 ### Envelope
 Sabendo que TRANSICAO=0.1, existe a seguinte função dentro da classe SineOscillator no para calcular os valores do buffer:
 
-```c++
+```
 void process(float* audio_buffer, int buffer_len){
   if(DEBUG) cout << "sine class -> call process: "<<  buffer_len << " amp: "<<  amp << " freq: "<< freq << "  Fs: " << Fs << endl;
 
