@@ -10,6 +10,8 @@
 ___
 # t2_ComputacaoMusica
 
+Repositório https://github.com/LeDSantos/t2_ComputacaoMusica/
+
 **Pré-requisito: biblioteca [libsndfile](http://www.mega-nerd.com/libsndfile/).**
 
 Esse projeto foi escrito utilizando as tarefas do [laboratório](https://github.com/schramm/compmus_2020_1) como modelo.
@@ -45,10 +47,8 @@ void process(float* audio_buffer, int buffer_len){
 }
 ```
 Fator se comporta da seguinte forma:\
-<img src="https://github.com/LeDSantos/t2_ComputacaoMusica/blob/main/grafico.jpg" alt="fator" width="500"/>
+<img src="https://github.com/LeDSantos/t2_ComputacaoMusica/blob/main/grafico.jpg" alt="fator" width="600"/>
 
-![ADC](grafico.jpg)
-<!--Format: ![Alt Text](url) -->
 Isso se torna um envelope sobre o seno, que produz um som mais agradável.
 
 ### Ruído
