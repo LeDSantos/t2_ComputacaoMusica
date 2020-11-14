@@ -15,7 +15,8 @@ ___
 Esse projeto foi escrito utilizando as tarefas do [laboratório](https://github.com/schramm/compmus_2020_1) como modelo.
 A biblioteca read_write_wav.h possibilita ler e escrever em um arquivo *.wav.
 
-Vídeo da apresentação em:
+Vídeo da apresentação em: https://youtu.be/qhsNxg7OAaA
+Apresentação em: [Apresentação Trabalho Prático Computação e Música.pptx](Apresentação Trabalho Prático Computação e Música.pptx)
 
 Para executar:
 ```prompt
@@ -24,7 +25,7 @@ make
 ```
 
 ## PROGRAMA GERADOR MUSICAL
-O programa gera áudios de 15 segundos em arquivo *.wav. O áudio pode conter ruído, escala crescente de notas MIDI, notas aleatórias ou imagem esteganografada. As notas utilizam envelope. Dependendo da sua escolha, serão necessárias mais dados. As informações apresentadas a seguir são sobre o código do arquivo gerador_musical.cpp.
+O programa gera áudios de 15 segundos em arquivo *.wav. O áudio pode conter ruído, escala crescente de notas MIDI, notas aleatórias ou imagem esteganografada. As notas utilizam envelope. Dependendo da sua escolha, serão necessárias mais dados. As informações apresentadas a seguir são sobre o código do arquivo [gerador_musical.cpp](gerador_musical.cpp).
 
 ### Envelope
 Sabendo que TRANSICAO=0.1, existe a seguinte função dentro da classe SineOscillator no para calcular os valores do buffer:
@@ -57,12 +58,10 @@ Cria uma amostra contendo uma escala de notas que inicia no valor MIDI(0 até 12
 Após informar a oitava utilizada(-1 até 9), cria amostra contendo notas aleatórias com a duração(em segundos) informada.
 
 ### Imagem esteganografada
-De acordo com a Wikipédia, [esteganografia](https://pt.wikipedia.org/wiki/Esteganografia) (do grego "escrita escondida") é o estudo e uso das técnicas para ocultar a existência de uma mensagem dentro de outra, uma forma de segurança por obscurantismo. O código em C disponibilizado [aqui](https://www.seeingwithsound.com/im2sound.htm) foi adaptado para ser utilizado no programa.
+De acordo com a Wikipédia, [esteganografia](https://pt.wikipedia.org/wiki/Esteganografia) (do grego "escrita escondida") é o estudo e uso das técnicas para ocultar a existência de uma mensagem dentro de outra, uma forma de segurança por obscurantismo. O código em C disponibilizado em https://www.seeingwithsound.com/im2sound.htm foi adaptado para ser utilizado no programa. Esse código faz parte do projeto The vOICe, uma tecnologia de substituição sensorial que converte visões visuais puras em ondas sonoras correspondentes enquanto ainda preserva o significado da informação visual total.
 
-A imagem de 64x64 bits com 16 escalas de cinza está em um arquivo *.txt, sendo que, após um processamento do programa, 'a' corresponde a 0, 'b' a 1, a assim sucessivemente até 'p' corresponder a 15 dentro de uma matriz 64x64. Inicialmente, a são criados valores para frequência e fase das ondas seno que serão utilizadas posteriormente. Após, é feito um loop para determinar os valores que serão colocados no buffer que será gravado no arquivo de áudio. Uma coluna da matriz de cinzas é analisada a cada interação, os elementos são utilizados como amplitude do seno e a soma dos senos da coluna resulta em uma onda. A onda passa por um filtro passa-baixa de segunda ordem. Então, o resultado é colocado no buffer. Como a imagem preenche somente 1 segundo, o restante do buffer é preenchido com copias do primeiro segundo.
+A imagem de 64x64 bits com 16 escalas de cinza está em um arquivo *.txt, sendo que, após um processamento do programa, 'a' corresponde a 0, 'b' a 1, a assim sucessivemente até 'p' corresponder a 15 dentro de uma matriz 64x64.
 
+Inicialmente, são criados valores para frequência e fase das ondas seno que serão utilizadas posteriormente. Após, é feito um loop para determinar os valores que serão colocados no buffer que será gravado no arquivo de áudio. Uma coluna da matriz de cinzas é analisada a cada interação, os elementos são utilizados como amplitude do seno e a soma dos senos da coluna resulta em uma onda. A onda passa por um filtro passa-baixa de segunda ordem. Então, o resultado é colocado no buffer. Como a imagem preenche somente 1 segundo, o restante do buffer é preenchido com copias do primeiro segundo.
 
-Documento: https://ufrgscpd-my.sharepoint.com/:w:/g/personal/00275604_ufrgs_br/ERbtLlcDGphJudISohRb3_MBa9o8atdyETxBzuNKU3v1Nw?e=gO3K8y
-
-Apresentação: https://ufrgscpd-my.sharepoint.com/:p:/g/personal/00275604_ufrgs_br/EZwAgF1ln4lLhDtIV7DrD2AB_MiEfXURlHzZiLWpY9Llww?e=iyNYu3
-
+**Fontes dos áudios**: [fonte_musicas_eruditas.md](fonte_musicas_eruditas.md)
