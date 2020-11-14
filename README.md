@@ -15,8 +15,9 @@ ___
 Esse projeto foi escrito utilizando as tarefas do [laboratório](https://github.com/schramm/compmus_2020_1) como modelo.
 A biblioteca read_write_wav.h possibilita ler e escrever em um arquivo *.wav.
 
-Vídeo da apresentação em: https://youtu.be/qhsNxg7OAaA
-Apresentação em: [Apresentação Trabalho Prático Computação e Música.pptx](Apresentação Trabalho Prático Computação e Música.pptx)
+**Vídeo da apresentação em: https://youtu.be/qhsNxg7OAaA**
+
+Apresentação em: [Apresentação Trabalho Prático Computação e Música.pptx](https://github.com/LeDSantos/t2_ComputacaoMusica/blob/main/Apresenta%C3%A7%C3%A3o%20Trabalho%20Pr%C3%A1tico%20Computa%C3%A7%C3%A3o%20e%20M%C3%BAsica.pptx)
 
 Para executar:
 ```prompt
