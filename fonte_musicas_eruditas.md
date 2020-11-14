@@ -10,5 +10,5 @@ ___
 Título: Tico-tico no Fubá\
 Autor: Zequinha de Abreu\
 Fonte: Wikipédia\
-Arquivo: [Tico_Tico_no_Fubá-Orquestra_Colbaz-Zequinha_de_Abreu-1931.wav](Tico_Tico_no_Fubá-Orquestra_Colbaz-Zequinha_de_Abreu-1931.wav)\
+Arquivo: [Tico_Tico_no_Fubá-Orquestra_Colbaz-Zequinha_de_Abreu-1931.ogg](Tico_Tico_no_Fub%C3%A1-Orquestra_Colbaz-Zequinha_de_Abreu-1931.ogg)\
 Link: https://pt.wikipedia.org/wiki/Ficheiro:Tico_Tico_no_Fub%C3%A1-Orquestra_Colbaz-Zequinha_de_Abreu-1931.ogg
