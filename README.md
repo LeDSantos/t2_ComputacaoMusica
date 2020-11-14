@@ -45,6 +45,8 @@ void process(float* audio_buffer, int buffer_len){
 }
 ```
 Fator se comporta da seguinte forma:\
+<img src="https://github.com/LeDSantos/t2_ComputacaoMusica/blob/main/grafico.jpg" alt="fator" width="500"/>
+
 ![ADC](grafico.jpg)
 <!--Format: ![Alt Text](url) -->
 Isso se torna um envelope sobre o seno, que produz um som mais agradável.
